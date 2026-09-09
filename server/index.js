@@ -1,0 +1,81 @@
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+import { toNodeHandler } from 'better-auth/node';
+import { auth, getAuthConfig } from './auth.js';
+import { handleDeleteWallet, handleWalletRecords } from './records.js';
+import { handleAuctions } from './auctions.js';
+import { handleAuctionEvents } from './auction-events.js';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+const builtDir = path.join(rootDir, 'dist');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Enable CORS for localhost and frontend origins
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+  ],
+  credentials: true,
+}));
+
+// Mount Better Auth handler (NOTE: Must be placed BEFORE express.json())
+app.all('/api/auth/*splat', toNodeHandler(auth));
+
+// Body parsers for custom API routes AFTER auth handler
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.all('/api/wallets', handleWalletRecords);
+app.all('/api/wallets/:id', handleDeleteWallet);
+app.all('/api/auctions', handleAuctions);
+app.all('/api/auction-events', handleAuctionEvents);
+
+// System telemetry and auth status endpoint
+app.get('/api/system/status', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    auth: getAuthConfig(),
+  });
+});
+
+app.all('/api/*splat', (req, res) => {
+  res.status(404).json({ error: `API endpoint not found: ${req.path}` });
+});
+
+// Prefer Vite's bundled output so browsers never receive unresolved package imports.
+app.use(express.static(builtDir, {
+  extensions: ['html'],
+}));
+
+// Keep source files available for non-bundled static assets during development.
+app.use(express.static(rootDir, {
+  extensions: ['html'],
+}));
+
+// Catch-all fallback to serve index.html for client-side navigation
+app.use((req, res) => {
+  res.sendFile(path.join(builtDir, 'index.html'), (error) => {
+    if (error) res.sendFile(path.join(rootDir, 'index.html'));
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`\n======================================================`);
+  console.log(`  🛡️  ProofXShield Production & Auth Server`);
+  console.log(`  🚀  Listening at: http://localhost:${PORT}`);
+  console.log(`  🔐  Better Auth:  http://localhost:${PORT}/api/auth`);
+  console.log(`  📊  Status API:   http://localhost:${PORT}/api/system/status`);
+  console.log(`======================================================\n`);
+});
