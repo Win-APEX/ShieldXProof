@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" fill="none">
+  <defs>
+    <radialGradient id="aura"><stop stop-color="#9b8cff" stop-opacity=".25"/><stop offset="1" stop-color="#9b8cff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="shield" x1="321" y1="117" x2="617" y2="612" gradientUnits="userSpaceOnUse"><stop stop-color="#ffffff" stop-opacity=".22"/><stop offset="1" stop-color="#5c44ff" stop-opacity=".1"/></linearGradient>
+    <linearGradient id="line" x1="341" y1="149" x2="565" y2="590" gradientUnits="userSpaceOnUse"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#9b8cff"/></linearGradient>
+    <filter id="blur" x="0" y="0" width="900" height="760" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="38"/></filter>
+  </defs>
+  <ellipse cx="467" cy="375" rx="350" ry="320" fill="url(#aura)" filter="url(#blur)"/>
+  <circle cx="454" cy="379" r="254" stroke="#9b8cff" stroke-opacity=".15"/>
+  <circle cx="454" cy="379" r="218" stroke="#9b8cff" stroke-opacity=".18" stroke-dasharray="3 12"/>
+  <path d="M454 105 617 167v122c0 110-59 191-163 247-104-56-163-137-163-247V167l163-62Z" fill="url(#shield)" stroke="url(#line)" stroke-opacity=".8" stroke-width="2"/>
+  <path d="M454 158 572 203v86c0 79-43 139-118 183-75-44-118-104-118-183v-86l118-45Z" fill="#000000" fill-opacity=".85" stroke="#ffffff" stroke-opacity=".4"/>
+  <ellipse cx="454" cy="350" rx="160" ry="48" transform="rotate(-24 454 350)" stroke="#9b8cff" stroke-width="4" stroke-dasharray="24 12" fill="none"/>
+  <circle cx="454" cy="350" r="28" fill="#ffffff"/>
+  <circle cx="454" cy="350" r="48" stroke="url(#line)" stroke-width="4" fill="none"/>
+</svg>

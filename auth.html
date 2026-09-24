@@ -24,7 +24,8 @@
       overflow-y: auto;
       overflow-x: hidden;
       min-height: 100vh;
-      background: #000000;
+      background: #04080f;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
     }
     .auth-container {
       max-width: 520px;
@@ -34,9 +35,11 @@
       z-index: 1;
     }
     .auth-card {
-      background: #111113;
+      background: rgba(8, 14, 26, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
+      border-radius: 20px;
       padding: clamp(24px, 4vw, 36px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       transition: border-color 0.25s ease;
@@ -48,17 +51,20 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(232, 212, 204, 0.12);
+      border: 1px solid rgba(232, 212, 204, 0.25);
       border-radius: 999px;
       padding: 4px 12px;
-      font-size: 11.5px;
-      color: #ffffff;
+      font-size: 11px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e8d4cc;
       font-weight: 500;
       margin-bottom: 16px;
     }
     .auth-title {
-      font-family: var(--font-display);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: clamp(24px, 3.5vw, 32px);
       letter-spacing: -0.03em;
       line-height: 1.15;
@@ -67,13 +73,13 @@
     }
     .auth-subtitle {
       font-size: 13.5px;
-      color: #8e8e8e;
+      color: rgba(200, 215, 240, 0.65);
       line-height: 1.5;
       margin-bottom: 24px;
     }
     .auth-tabs {
       display: flex;
-      background: #09090b;
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 999px;
       padding: 4px;
       margin-bottom: 24px;
@@ -85,8 +91,8 @@
       border-radius: 999px;
       border: none;
       background: transparent;
-      color: #8e8e8e;
-      font-family: var(--font-sans);
+      color: rgba(200, 215, 240, 0.65);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
@@ -95,17 +101,17 @@
     }
     .auth-tab.active {
       background: #ffffff;
-      color: #000000;
+      color: #04080f;
       font-weight: 600;
     }
     .google-btn {
       width: 100%;
       background: #ffffff;
-      color: #000000;
+      color: #04080f;
       border: none;
       border-radius: 999px;
       padding: 13px 20px;
-      font-family: var(--font-sans);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 14px;
       font-weight: 600;
       display: flex;
@@ -113,12 +119,12 @@
       justify-content: center;
       gap: 10px;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .google-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 0 26px rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 26px rgba(255, 255, 255, 0.3);
     }
     .google-btn:active {
       transform: translateY(0);
@@ -127,8 +133,9 @@
       display: flex;
       align-items: center;
       margin: 24px 0;
-      color: #555555;
+      color: rgba(200, 215, 240, 0.4);
       font-size: 11px;
+      font-family: 'Space Mono', monospace;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -146,52 +153,55 @@
     }
     .form-label {
       display: block;
-      font-size: 12.5px;
+      font-size: 12px;
+      font-family: 'Space Mono', monospace;
       font-weight: 500;
-      color: #cbd5e1;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(200, 215, 240, 0.7);
       margin-bottom: 7px;
     }
     .form-input {
       width: 100%;
-      background: #09090b;
+      background: rgba(4, 8, 15, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
       padding: 12px 14px;
-      font-family: var(--font-sans);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 13.5px;
       color: #ffffff;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .form-input:focus {
-      border-color: #ffffff;
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+      border-color: #c8f0d8;
+      box-shadow: 0 0 0 2px rgba(200, 240, 216, 0.2);
     }
     .form-input::placeholder {
-      color: #52525b;
+      color: rgba(200, 215, 240, 0.35);
     }
     .submit-btn {
       width: 100%;
-      background: #ffffff;
-      color: #000000;
+      background: #c8f0d8;
+      color: #04080f;
       border: none;
       border-radius: 999px;
       padding: 13px 20px;
-      font-family: var(--font-sans);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 14.5px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 20px rgba(200, 240, 216, 0.2);
       transition: transform 0.2s, box-shadow 0.2s;
       margin-top: 8px;
     }
     .submit-btn:hover:not(:disabled) {
       transform: translateY(-1px);
-      box-shadow: 0 0 26px rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 26px rgba(200, 240, 216, 0.35);
     }
     .submit-btn:disabled {
       opacity: 0.5;
@@ -207,27 +217,27 @@
     }
     .alert-box.error {
       display: block;
-      background: rgba(239, 68, 68, 0.1);
+      background: rgba(239, 68, 68, 0.12);
       border: 1px solid rgba(239, 68, 68, 0.3);
       color: #fca5a5;
     }
     .alert-box.success {
       display: block;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      color: #86efac;
+      background: rgba(200, 240, 216, 0.12);
+      border: 1px solid rgba(200, 240, 216, 0.3);
+      color: #c8f0d8;
     }
     .alert-box.info {
       display: block;
-      background: rgba(59, 130, 246, 0.1);
+      background: rgba(59, 130, 246, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.3);
       color: #93c5fd;
     }
     .session-panel {
       display: none;
-      background: #09090b;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
       padding: 24px;
       text-align: center;
     }
@@ -235,27 +245,27 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: #27272a;
-      border: 2px solid #ffffff;
+      background: rgba(200, 240, 216, 0.15);
+      border: 2px solid #c8f0d8;
       margin: 0 auto 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      color: #ffffff;
+      color: #c8f0d8;
     }
     .atlas-status-badge {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #09090b;
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 10px 14px;
       margin-top: 24px;
       font-size: 11.5px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      color: #a1a1aa;
+      font-family: 'Space Mono', monospace;
+      color: rgba(200, 215, 240, 0.6);
     }
     .status-dot {
       width: 7px;
@@ -265,8 +275,8 @@
       margin-right: 6px;
     }
     .status-dot.green {
-      background: #4ade80;
-      box-shadow: 0 0 8px #4ade80;
+      background: #c8f0d8;
+      box-shadow: 0 0 8px #c8f0d8;
     }
     .status-dot.amber {
       background: #fbbf24;
@@ -275,15 +285,8 @@
   </style>
 </head>
 <body class="subpage">
-  <!-- Full-bleed background video -->
-  <div class="bg">
-    <video class="bg-video" autoplay muted loop playsinline>
-      <source
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
-        type="video/mp4"
-      />
-    </video>
-  </div>
+  <!-- Clean dark background -->
+  <div class="bg"></div>
 
   <div class="auth-container">
     <!-- Header -->
@@ -299,6 +302,7 @@
         <a href="create-auction.html" class="nav-link">Auctions</a>
         <a href="auction.html" class="nav-link">Place bid</a>
         <a href="auction-results.html" class="nav-link">Declare winner</a>
+        <a href="profile.html" class="nav-link">Profile</a>
         <a href="auth.html" class="nav-link account-link active">Sign in</a>
       </nav>
 
@@ -320,6 +324,7 @@
       <a href="create-auction.html" class="mobile-nav-link">Auctions</a>
       <a href="auction.html" class="mobile-nav-link">Place bid</a>
       <a href="auction-results.html" class="mobile-nav-link">Declare winner</a>
+      <a href="profile.html" class="mobile-nav-link">Profile</a>
       <button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button>
       <a href="auth.html" class="mobile-sign-in">Sign in</a>
     </nav>

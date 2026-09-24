@@ -1,5 +1,5 @@
 // Set this once to the address emitted by the singleton contract deployment.
-export const CONTRACT_ADDRESS = 'b0bd1feb64dadad51e987f6ba8e08adaa26945b3135b44c014c8f08a56bbae89';
+export const CONTRACT_ADDRESS = '5945455af17740ed58789367447af626d3241b830f581ef0b10949d72e67e287';
 
 export function requireContractAddress() {
   if (!/^[0-9a-f]{64}$/i.test(CONTRACT_ADDRESS)) {

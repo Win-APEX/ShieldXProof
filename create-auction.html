@@ -1,35 +1,302 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="theme-color" content="#080b12" />
-  <title>Create Auction — ProofXShield</title><link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <title>Auctions — ProofXShield</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    body { min-height: 100vh; padding: 22px clamp(16px, 4vw, 52px) 72px; background: radial-gradient(ellipse at 50% -20%, #193c36 0, #0a1113 50%); color: #f1f7f5; }
-    .create-header { margin: 0 auto 48px; }.create-card { width: min(100%, 650px); margin: auto; padding: clamp(22px, 4vw, 36px); border: 1px solid #26383a; border-radius: 18px; background: #111d20; }
-    .create-kicker { color: #9cf1d4; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }.create-card h1 { margin: 12px 0; font-size: clamp(34px, 6vw, 48px); letter-spacing: -.05em; }
-    .create-card p { color: #aebfbb; font-size: 14px; line-height: 1.7; }.create-control { display: grid; gap: 8px; margin: 22px 0; }.create-control span { color: #d3dfdc; font-size: 13px; font-weight: 600; }
-    .create-control input { min-height: 48px; border: 1px solid #34494a; border-radius: 10px; outline: 0; background: #0b1415; color: #f4f7fb; padding: 12px 14px; font: inherit; }.create-control input:focus { border-color: #9cf1d4; }
-    .create-button { width: 100%; min-height: 48px; border: 0; border-radius: 10px; background: #9cf1d4; color: #08201a; font: inherit; font-weight: 800; cursor: pointer; }.create-button:disabled { cursor: not-allowed; opacity: .42; }
-    .create-status { min-height: 25px; overflow-wrap: anywhere; color: #9cf1d4 !important; }.create-note { padding: 13px; border-left: 2px solid #9cf1d4; border-radius: 0 8px 8px 0; background: #142221; font-size: 12px !important; }
-    .catalogue { width: min(100%, 1040px); margin: 56px auto 0; }.catalogue h2 { margin: 10px 0; font-size: clamp(28px, 5vw, 40px); letter-spacing: -.05em; }.catalogue-kicker { color: #9cf1d4; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }.catalogue-intro, .catalogue-status { color: #aebfbb; line-height: 1.7; }.catalogue-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }.catalogue-card { display: grid; gap: 14px; padding: 22px; border: 1px solid #26383a; border-radius: 16px; background: linear-gradient(145deg, #132123, #10191b); }.catalogue-card h3 { margin: 0; font-size: 20px; }.catalogue-card p { margin: 0; color: #91a6a5; font-size: 13px; }.catalogue-metrics { display: flex; flex-wrap: wrap; gap: 16px; color: #d9e6e2; font-size: 13px; }.catalogue-card code { overflow-wrap: anywhere; color: #91a6a5; font-size: 11px; }.catalogue-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; border-radius: 9px; background: #9cf1d4; color: #08201a; font-weight: 800; text-decoration: none; padding: 0 16px; }.catalogue-status { min-height: 24px; margin: 18px 0; }
+    .auctions-hero-section {
+      text-align: center;
+      max-width: 760px;
+      margin: 20px auto 44px;
+    }
+    .auctions-hero-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      margin: 14px 0 12px;
+      color: #ffffff;
+      line-height: 1.08;
+    }
+    .auctions-hero-desc {
+      font-size: clamp(14px, 1.7vw, 16.5px);
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .auctions-layout {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto 80px;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .auctions-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .create-card {
+      width: 100%;
+      padding: clamp(24px, 3.5vw, 32px);
+      position: sticky;
+      top: 24px;
+    }
+    .create-card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 10px 0 6px;
+      letter-spacing: -0.02em;
+    }
+    .create-card p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .create-control {
+      display: grid;
+      gap: 8px;
+      margin: 18px 0;
+    }
+    .create-control span {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .create-button {
+      width: 100%;
+      min-height: 46px;
+      margin-top: 8px;
+    }
+    .create-status {
+      min-height: 24px;
+      margin-top: 14px;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+    .create-note {
+      margin-top: 18px;
+      padding: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .catalogue {
+      width: 100%;
+    }
+    .catalogue-header {
+      margin-bottom: 20px;
+    }
+    .catalogue h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin: 0 0 4px;
+    }
+    .catalogue-intro {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin: 0;
+    }
+    .catalogue-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .catalogue-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 26px;
+    }
+    .catalogue-card h3 {
+      font-size: 19px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .catalogue-card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    .catalogue-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+    .catalogue-card code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      overflow-wrap: anywhere;
+    }
+    .catalogue-link {
+      margin-top: auto;
+      align-self: flex-start;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
-  <header class="site-header create-header">
-    <a href="index.html" class="logo-btn" aria-label="ProofXShield home"><img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" /></a>
-    <nav class="nav-pill" aria-label="Main Navigation"><a href="index.html" class="nav-link">Home</a><a href="create-auction.html" class="nav-link active" aria-current="page">Auctions</a><a href="auction.html" class="nav-link">Place bid</a><a href="auction-results.html" class="nav-link">Declare winner</a><a href="auth.html" class="nav-link account-link">Sign in</a></nav>
-    <button class="sign-in-btn wallet-nav-button" type="button" data-wallet-connect>Connect wallet</button><span class="wallet-nav-status" data-wallet-status aria-live="polite"></span>
-    <button class="mobile-burger" aria-label="Toggle Menu" aria-expanded="false"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
-  </header>
-  <div class="mobile-overlay"></div><nav class="mobile-sheet" aria-label="Mobile Navigation"><a href="index.html" class="mobile-nav-link">Home</a><a href="create-auction.html" class="mobile-nav-link active">Auctions</a><a href="auction.html" class="mobile-nav-link">Place bid</a><a href="auction-results.html" class="mobile-nav-link">Declare winner</a><a href="auth.html" class="mobile-sign-in">Sign in</a><button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button></nav>
-  <main class="create-card"><span class="create-kicker">Shared contract · Preprod</span><h1>Create an auction</h1><p>Creating opens a new auction ID inside the one deployed Midnight contract, then publishes its public listing to the shared catalogue. Approve one transaction in your connected wallet.</p>
-    <label class="create-control"><span>Auction title</span><input id="create-title" type="text" maxlength="100" placeholder="e.g. Community grant round" required /></label>
-    <label class="create-control"><span>Minimum qualifying bid (reserve)</span><input id="create-reserve" type="number" min="1" step="1" value="1" required /></label>
-    <button id="create-auction-button" class="create-button" type="button" disabled>Create and publish auction</button>
-    <p id="create-auction-status" class="create-status" role="status" aria-live="polite">Connect a Lace or 1AM wallet to continue.</p>
-  <p class="create-note">Your signed-in account stores the shared auction entry and public transaction references. Creator authorization and private bids remain in this browser; clearing browser data removes access to creator-only actions and unrevealed bids.</p>
-  </main>
-  <section class="catalogue" aria-labelledby="current-auctions-title"><span class="catalogue-kicker">Live on Midnight Preprod</span><h2 id="current-auctions-title">Current auctions</h2><p class="catalogue-intro">All published auctions appear here with state read directly from Preprod.</p><p id="catalogue-status" class="catalogue-status" role="status" aria-live="polite">Loading registered auctions…</p><div id="catalogue-list" class="catalogue-list"></div></section>
-  <script type="module" src="main.js"></script><script type="module" src="create-auction.js"></script><script type="module" src="auctions.js"></script>
+  <div class="page" style="padding-bottom: 0;">
+    <!-- Header Navigation -->
+    <header class="site-header">
+      <a href="index.html" class="logo-btn" aria-label="ProofXShield home">
+        <img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" />
+      </a>
+      <nav class="nav-pill" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="create-auction.html" class="nav-link active" aria-current="page">Auctions</a>
+        <a href="auction.html" class="nav-link">Place bid</a>
+        <a href="auction-results.html" class="nav-link">Declare winner</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <a href="auth.html" class="nav-link account-link">Sign in</a>
+      </nav>
+      <button class="sign-in-btn wallet-nav-button btn solid" type="button" data-wallet-connect>Connect wallet</button>
+      <span class="wallet-nav-status" data-wallet-status aria-live="polite"></span>
+      <button class="mobile-burger" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-overlay"></div>
+    <nav class="mobile-sheet" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="create-auction.html" class="mobile-nav-link active" aria-current="page">Auctions</a>
+      <a href="auction.html" class="mobile-nav-link">Place bid</a>
+      <a href="auction-results.html" class="mobile-nav-link">Declare winner</a>
+      <a href="profile.html" class="mobile-nav-link">Profile</a>
+      <button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button>
+      <a href="auth.html" class="mobile-sign-in">Sign in</a>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="auctions-hero-section">
+      <a href="index.html#architecture" class="orbit-pill">
+        <span class="orbit-chip">Midnight Preprod</span>
+        <span class="orbit-pill-label">Shielded Auction Catalogue</span>
+        <svg class="orbit-arrow" viewBox="0 0 9.5 8" width="9.5" height="8">
+          <path d="M0.7 4H8.8M5.6 0.75 8.85 4 5.6 7.25" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+      </a>
+      <h1 class="auctions-hero-title">Confidential Sealed Auctions</h1>
+      <p class="auctions-hero-desc">Explore active zero-knowledge auction rounds on Midnight or launch a new shielded bidding round instantly.</p>
+    </section>
+
+    <!-- Two-Column Layout -->
+    <div class="auctions-layout">
+      <!-- Create Auction Sticky Card -->
+      <main class="create-card">
+        <span class="orbit-chip create-kicker">New Round</span>
+        <h2>Create an auction</h2>
+        <p>Opens a new auction ID inside the shared Midnight smart contract and publishes its public catalogue entry.</p>
+        
+        <label class="create-control">
+          <span>Auction title</span>
+          <input id="create-title" type="text" maxlength="100" placeholder="e.g. Community grant round" required />
+        </label>
+        
+        <label class="create-control">
+          <span>Minimum qualifying bid (reserve)</span>
+          <input id="create-reserve" type="number" min="1" step="1" value="1" required />
+        </label>
+        
+        <button id="create-auction-button" class="create-button btn solid" type="button" disabled>Create & Publish Auction</button>
+        <p id="create-auction-status" class="create-status" role="status" aria-live="polite">Connect a Lace or 1AM wallet to continue.</p>
+        <p class="create-note">Creator authorization and private bids remain in this browser. Clearing local storage removes access to creator actions.</p>
+      </main>
+
+      <!-- Active Auctions Catalogue Grid -->
+      <section class="catalogue" aria-labelledby="current-auctions-title">
+        <div class="catalogue-header">
+          <span class="orbit-chip catalogue-kicker">Live Catalogue</span>
+          <h2 id="current-auctions-title">Current auctions</h2>
+          <p class="catalogue-intro">All registered auctions with state read directly from Preprod ledger indexer.</p>
+        </div>
+        <p id="catalogue-status" class="catalogue-status" role="status" aria-live="polite">Loading registered auctions…</p>
+        <div id="catalogue-list" class="catalogue-list"></div>
+      </section>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/proofxshield-mark.svg" alt="ProofXShield" width="36" height="36" />
+            <span>ProofXShield</span>
+          </a>
+          <p class="footer-tagline">Shielded sealed-bid auctions powered by zero-knowledge proofs on the Midnight blockchain.</p>
+          <div class="network-badge">
+            <span class="chain-dot"></span>
+            <span>Midnight Preprod Testnet</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="create-auction.html">Auctions</a>
+          <a href="auction.html">Place Bid</a>
+          <a href="auction-results.html">Declare Winner</a>
+          <a href="profile.html">Your Profile</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Protocol</h4>
+          <a href="index.html#architecture">Architecture</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="auth.html">Authentication</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Contract</h4>
+          <p class="footer-contract-label">Shared Contract ID:</p>
+          <code class="footer-contract-id">5945455af1774...e67e287</code>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 ProofXShield. All rights reserved. Built on Midnight Blockchain.</p>
+        <div class="footer-legal">
+          <span>Zero-Knowledge Confidentiality</span>
+          <span>•</span>
+          <span>Midnight Preprod</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="create-auction.js"></script>
+  <script type="module" src="auctions.js"></script>
 </body>
 </html>

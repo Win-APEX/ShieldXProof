@@ -235,9 +235,9 @@ The app is configured for Midnight Preprod. The shared contract address is set i
 
 | Network | Contract address |
 |---------|-----------------|
-| Midnight Preprod | `b0bd1feb64dadad51e987f6ba8e08adaa26945b3135b44c014c8f08a56bbae89` |
+| Midnight Preprod | `5945455af17740ed58789367447af626d3241b830f581ef0b10949d72e67e287` |
 
-*See [`public/mid_explorer.png`](./public/mid_explorer.png) for a Midnight Explorer capture of this deployment.*
+*See [`public/actual_mid.png`](./public/actual_mid.png) for a Midnight Explorer capture of this deployment.*
 
 ### Re-deploying the contract
 
@@ -270,7 +270,7 @@ The app is hosted at [shield-x-proof.vercel.app](https://shield-x-proof.vercel.a
 
 ### Preprod deployment
 
-![Midnight Explorer showing the ProofXShield contract deployed on Preprod](public/mid_explorer.png)
+![Midnight Explorer showing the ProofXShield contract deployed on Preprod](public/actual_mid.png)
 
 *Midnight Explorer capture of the contract address on Preprod, showing the `finalize_auction` entry point and ledger state.*
 

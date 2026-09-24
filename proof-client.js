@@ -217,9 +217,6 @@ export async function submitAuctionCircuit(providers, contractAddress, circuitId
 }
 
 export async function deploySharedContractFromConnectedWallet(api) {
-  if (/^[0-9a-f]{64}$/i.test(CONTRACT_ADDRESS)) {
-    throw new Error('The shared contract address is already configured. This app deploys the shared contract once.');
-  }
   const storagePassword = await getAuctionPrivateStatePassword(api);
   const session = await createAuctionSession(api, storagePassword);
   try {
@@ -231,6 +228,58 @@ export async function deploySharedContractFromConnectedWallet(api) {
   } finally {
     await session.dispose().catch(() => {});
   }
+}
+
+export async function proofshieldDeployAuction() {
+  console.log('[ProofXShield] Initiating contract deployment...');
+
+  let api = window.proofxshieldWallet?.getConnectedWallet?.() || window.__midnightWalletApi;
+
+  if (!api) {
+    const midnightObj = window.midnight ?? {};
+    const walletEntries = Object.entries(midnightObj);
+
+    if (walletEntries.length === 0) {
+      const errorMsg = 'No Midnight wallet extension (Lace or 1AM) detected on window.midnight. Please ensure your Lace / 1AM extension is installed, unlocked, and enabled for Midnight Preprod.';
+      console.error(`[ProofXShield] ${errorMsg}`);
+      throw new Error(errorMsg);
+    }
+
+    const [walletId, walletProvider] = walletEntries[0];
+    const walletName = walletProvider?.name || (/1am/i.test(walletId) ? '1AM Wallet' : 'Midnight Wallet');
+    console.log(`[ProofXShield] Connecting to ${walletName} (${walletId}) on Preprod...`);
+
+    try {
+      if (typeof walletProvider.connect === 'function') {
+        api = await walletProvider.connect('preprod');
+      } else if (typeof walletProvider.enable === 'function') {
+        api = await walletProvider.enable();
+      } else {
+        api = walletProvider;
+      }
+    } catch (err) {
+      console.error(`[ProofXShield] Failed to connect wallet ${walletName}:`, err);
+      throw err;
+    }
+  }
+
+  if (!api) {
+    throw new Error('Could not get active Midnight wallet API session.');
+  }
+
+  window.__midnightWalletApi = api;
+
+  console.log('[ProofXShield] Executing contract deployment transaction...');
+  const hexAddress = await deploySharedContractFromConnectedWallet(api);
+  console.log(`%c[ProofXShield] ✅ Shared Contract Deployed Successfully!`, 'color: #c8f0d8; font-weight: bold; font-size: 14px;');
+  console.log(`%cContract Address: ${hexAddress}`, 'color: #f0b85a; font-weight: bold;');
+  return hexAddress;
+}
+
+if (typeof window !== 'undefined') {
+  window.proofshieldDeployAuction = proofshieldDeployAuction;
+  window.proofxshieldDeployAuction = proofshieldDeployAuction;
+  window.deployProofXShieldAuction = proofshieldDeployAuction;
 }
 
 export function transactionReference(result) {

@@ -3,84 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#080b12" />
+  <meta name="theme-color" content="#000000" />
   <title>Your Profile — ProofXShield</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    body { background: radial-gradient(ellipse at 50% -15%, #172137 0, #080b12 55%); }
-    .profile-page { min-height: 100vh; padding: 22px clamp(16px, 4vw, 48px) 64px; }
-    .profile-header { margin: 0 auto 44px; }
-    .profile-content { width: min(100%, 920px); margin: 0 auto; }
-    .profile-heading { margin-bottom: 24px; }
-    .profile-heading h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.04em; }
-    .profile-heading p { color: #aab3c2; margin-top: 8px; line-height: 1.6; }
-    .profile-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .profile-card { min-width: 0; border: 1px solid #283246; border-radius: 18px; background: rgba(13, 19, 31, .88); padding: 22px; }
-    .profile-card h2 { font-size: 17px; margin-bottom: 16px; }
-    .profile-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .profile-field small, .wallet-item small { display: block; color: #8e9aab; margin-bottom: 6px; }
-    .profile-field strong { overflow-wrap: anywhere; font-size: 14px; font-weight: 500; }
-    .profile-section-wide { grid-column: 1 / -1; }
-    .profile-list { display: grid; gap: 10px; }
-    .wallet-item, .history-item { border: 1px solid #263043; border-radius: 12px; padding: 13px 14px; background: #0a0f19; }
-    .wallet-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .wallet-address { display: block; overflow-wrap: anywhere; font-family: ui-monospace, monospace; font-size: 12px; color: #d7e0ee; }
-    .history-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
-    .history-item small { color: #95a1b2; }
-    .history-item code { grid-column: 1 / -1; overflow-wrap: anywhere; color: #9db8ff; font-size: 11px; }
-    .profile-muted, .profile-message { color: #9aa6b6; font-size: 13px; line-height: 1.6; }
-    .profile-message { margin: 12px 0 0; }
-    .profile-button { border: 1px solid #39455b; border-radius: 9px; background: #182237; color: #f4f7fb; padding: 8px 11px; cursor: pointer; white-space: nowrap; }
-    .profile-button:hover { background: #22304a; }
-    .profile-actions { display: flex; justify-content: flex-end; margin: 28px 0; }
-    .profile-loading { color: #aab3c2; padding: 36px 0; text-align: center; }
-    [hidden] { display: none !important; }
-    @media (max-width: 720px) {
+    .profile-content {
+      width: 100%;
+      max-width: 960px;
+      margin: 40px auto 80px;
+    }
+    .profile-heading h1 {
+      font-size: clamp(30px, 4.5vw, 44px);
+      margin: 8px 0 10px;
+    }
+    .profile-heading p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+    @media (max-width: 768px) {
       .profile-grid, .profile-fields { grid-template-columns: 1fr; }
       .profile-section-wide { grid-column: auto; }
-      .profile-header { margin-bottom: 32px; }
     }
+    .profile-card {
+      padding: clamp(24px, 3.5vw, 32px);
+    }
+    .profile-card h2 {
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      color: #ffffff;
+    }
+    .profile-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .profile-field small, .wallet-item small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .profile-field strong {
+      overflow-wrap: anywhere;
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+    .profile-section-wide { grid-column: 1 / -1; }
+    .profile-list { display: grid; gap: 12px; }
+    .wallet-item, .history-item {
+      padding: 16px;
+    }
+    .wallet-address {
+      display: block;
+      overflow-wrap: anywhere;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+    }
+    .history-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px 14px;
+    }
+    .profile-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 32px;
+    }
+    .profile-loading {
+      color: var(--text-muted);
+      padding: 48px 0;
+      text-align: center;
+      font-size: 15px;
+    }
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
-  <div class="profile-page">
+  <div class="page" style="padding-bottom: 0;">
     <header class="site-header profile-header">
-      <a href="index.html" class="logo-btn" aria-label="ProofXShield home"><img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" /></a>
+      <a href="index.html" class="logo-btn" aria-label="ProofXShield home">
+        <img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" />
+      </a>
       <nav class="nav-pill" aria-label="Main Navigation">
         <a href="index.html" class="nav-link">Home</a>
-      <a href="create-auction.html" class="nav-link">Auctions</a>
-      <a href="auction.html" class="nav-link">Place bid</a>
-      <a href="auction-results.html" class="nav-link">Declare winner</a>
+        <a href="create-auction.html" class="nav-link">Auctions</a>
+        <a href="auction.html" class="nav-link">Place bid</a>
+        <a href="auction-results.html" class="nav-link">Declare winner</a>
+        <a href="profile.html" class="nav-link active" aria-current="page">Profile</a>
         <a href="auth.html" class="nav-link account-link">Sign in</a>
       </nav>
-      <button class="sign-in-btn wallet-nav-button" type="button" data-wallet-connect>Connect wallet</button>
+      <button class="sign-in-btn wallet-nav-button btn solid" type="button" data-wallet-connect>Connect wallet</button>
       <span class="wallet-nav-status" data-wallet-status aria-live="polite"></span>
       <button class="mobile-burger" aria-label="Toggle Menu" aria-expanded="false">
-        <span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
       </button>
     </header>
+
     <div class="mobile-overlay"></div>
     <nav class="mobile-sheet" aria-label="Mobile Navigation">
       <a href="index.html" class="mobile-nav-link">Home</a>
       <a href="create-auction.html" class="mobile-nav-link">Auctions</a>
       <a href="auction.html" class="mobile-nav-link">Place bid</a>
       <a href="auction-results.html" class="mobile-nav-link">Declare winner</a>
-      <a href="auth.html" class="mobile-sign-in">Sign in</a>
+      <a href="profile.html" class="mobile-nav-link active" aria-current="page">Profile</a>
       <button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button>
+      <a href="auth.html" class="mobile-sign-in">Sign in</a>
     </nav>
 
     <main class="profile-content">
       <div id="profile-loading" class="profile-loading" role="status">Loading your profile…</div>
+      
       <div id="profile-view" hidden>
         <div class="profile-heading">
+          <span class="orbit-chip">User Profile</span>
           <h1>Your profile</h1>
-          <p>Account information, linked Midnight wallets, and transaction history.</p>
+          <p>Account details, linked Midnight wallets, and transaction history.</p>
         </div>
+
         <div class="profile-grid">
           <section class="profile-card profile-section-wide" aria-labelledby="account-heading">
-            <h2 id="account-heading">Account</h2>
+            <h2 id="account-heading">Account details</h2>
             <div class="profile-fields">
               <div class="profile-field"><small>Name</small><strong id="profile-name">—</strong></div>
               <div class="profile-field"><small>Email</small><strong id="profile-email">—</strong></div>
@@ -88,25 +149,81 @@
               <div class="profile-field"><small>Member since</small><strong id="profile-created">—</strong></div>
             </div>
           </section>
+
           <section class="profile-card" aria-labelledby="wallet-heading">
             <h2 id="wallet-heading">Linked wallets</h2>
             <div id="wallet-list" class="profile-list"><p class="profile-muted">Loading linked wallets…</p></div>
-            <p id="wallet-message" class="profile-message">Connect a wallet from the navbar to link it to your profile.</p>
+            <p id="wallet-message" class="profile-message" style="margin-top: 14px; font-size: 13px; color: var(--text-muted);">Connect a wallet from the navbar to link it to your profile.</p>
           </section>
+
           <section class="profile-card" aria-labelledby="chain-history-heading">
-            <h2 id="chain-history-heading">Wallet transaction history</h2>
-            <div id="chain-history" class="profile-list"><p class="profile-muted">Connect your wallet to load its recent transactions from Midnight.</p></div>
+            <h2 id="chain-history-heading">Transaction history</h2>
+            <div id="chain-history" class="profile-list"><p class="profile-muted">Connect your wallet to load recent transactions from Midnight.</p></div>
           </section>
+
           <section class="profile-card profile-section-wide" aria-labelledby="auction-history-heading">
             <h2 id="auction-history-heading">Saved auction activity</h2>
             <div id="auction-history" class="profile-list"><p class="profile-muted">Loading auction activity saved to your account…</p></div>
           </section>
         </div>
-        <div class="profile-actions"><button id="profile-signout" class="profile-button" type="button">Sign out</button></div>
+
+        <div class="profile-actions">
+          <button id="profile-signout" class="profile-button btn ghost" type="button">Sign out</button>
+        </div>
       </div>
       <p id="profile-error" class="profile-message" role="alert" hidden></p>
     </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/proofxshield-mark.svg" alt="ProofXShield" width="36" height="36" />
+            <span>ProofXShield</span>
+          </a>
+          <p class="footer-tagline">Shielded sealed-bid auctions powered by zero-knowledge proofs on the Midnight blockchain.</p>
+          <div class="network-badge">
+            <span class="chain-dot"></span>
+            <span>Midnight Preprod Testnet</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="create-auction.html">Auctions</a>
+          <a href="auction.html">Place Bid</a>
+          <a href="auction-results.html">Declare Winner</a>
+          <a href="profile.html">Your Profile</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Protocol</h4>
+          <a href="index.html#architecture">Architecture</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="auth.html">Authentication</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Contract</h4>
+          <p class="footer-contract-label">Shared Contract ID:</p>
+          <code class="footer-contract-id">5945455af1774...e67e287</code>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 ProofXShield. All rights reserved. Built on Midnight Blockchain.</p>
+        <div class="footer-legal">
+          <span>Zero-Knowledge Confidentiality</span>
+          <span>•</span>
+          <span>Midnight Preprod</span>
+        </div>
+      </div>
+    </footer>
   </div>
+
   <script type="module" src="main.js"></script>
   <script type="module" src="profile.js"></script>
 </body>

@@ -1,12 +1,205 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><title>Reveal & Results — ProofXShield</title><link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="stylesheet" href="styles.css" /><style>
-body{min-height:100vh;padding:22px clamp(16px,4vw,52px) 72px;background:radial-gradient(ellipse at 50% -20%,#193c36 0,#0a1113 50%);color:#f1f7f5}.results-wrap{width:min(100%,1000px);margin:35px auto}.results-wrap h1{font-size:clamp(36px,6vw,56px);letter-spacing:-.05em}.results-wrap p{color:#aebfbb;line-height:1.7}.result-address,.result-metrics,.result-card{border:1px solid #26383a;border-radius:14px;background:#111d20;padding:18px;margin:14px 0}.result-address code{overflow-wrap:anywhere;color:#9cf1d4}.result-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.result-metrics span{display:grid;gap:8px;color:#91a6a5;font-size:12px}.result-metrics strong{color:#f4faf7;font-size:22px}.result-card{max-width:680px}.result-card button,.result-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:0;border-radius:9px;padding:0 18px;background:#9cf1d4;color:#08201a;font-weight:800;text-decoration:none;cursor:pointer}.result-card button:disabled{opacity:.4}.result-status{min-height:24px;overflow-wrap:anywhere;color:#9cf1d4!important}.result-bids{display:grid;gap:8px}.result-bids>div{padding:12px;border:1px solid #26383a;border-radius:9px;color:#d8e4e1}
-</style></head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <title>Reveal & Results — ProofXShield</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .results-wrap {
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto 80px;
+    }
+    .results-wrap h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin: 10px 0 12px;
+    }
+    .results-wrap p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+    .result-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .result-metrics span {
+      display: grid;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .result-metrics strong {
+      color: #ffffff;
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 700;
+    }
+    .result-card {
+      max-width: 680px;
+      padding: clamp(24px, 4vw, 36px);
+    }
+    .result-card h2 {
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .result-bids {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+  </style>
+</head>
 <body data-auction-view="results">
-<header class="site-header"><a href="index.html" class="logo-btn" aria-label="ProofXShield home"><img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" /></a><nav class="nav-pill" aria-label="Main Navigation"><a href="index.html" class="nav-link">Home</a><a href="create-auction.html" class="nav-link">Auctions</a><a href="auction.html" class="nav-link">Place bid</a><a href="auction-results.html" class="nav-link active" aria-current="page">Declare winner</a><a href="auth.html" class="nav-link account-link">Sign in</a></nav><button class="sign-in-btn wallet-nav-button" type="button" data-wallet-connect>Connect wallet</button><span class="wallet-nav-status" data-wallet-status aria-live="polite"></span></header>
-<main class="results-wrap"><span style="color:#9cf1d4;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase">Midnight · Preprod</span><h1 id="auction-title">Reveal &amp; results</h1><p>Reveal your saved bids after the creator closes bidding. The creator can then publish the final result to the Midnight contract.</p><div class="result-address">Shared contract <code id="auction-contract-address">Loading…</code><br />Auction ID <code id="auction-id-value">Loading…</code></div><section class="result-metrics"><span>Phase<strong id="phase-value">Loading…</strong></span><span>Reserve<strong id="reserve-value">—</strong></span><span>Sealed bids<strong id="commitment-count">—</strong></span><span>Revealed bids<strong id="revealed-count">—</strong></span><span>Leading revealed bid<strong id="leading-bid">—</strong></span></section>
-<section class="result-card"><h2>Conclude auction</h2><p id="auction-chain-status">Reading live chain state…</p><p id="wallet-address">Not connected</p><div id="owner-actions" data-view="results" hidden><p>You created this auction. Closing bidding permanently ends new commitments.</p><button id="close-bidding" type="button" disabled>Close bidding</button></div><div id="reveal-panel" data-view="results" hidden><p>Revealing publishes each saved bid amount to the chain for a verifiable result.</p><button id="reveal-bids" type="button" disabled>Reveal my bids</button><div id="owner-finalize" hidden><p>Only the creator can publish the final result.</p><button id="declare-winner" type="button" disabled>Declare winner</button></div></div><div id="finished-panel" data-view="results" hidden><p>This auction is finalized. The result below is read from Preprod.</p><strong id="final-result">—</strong></div><p id="auction-message" class="result-status" role="status" aria-live="polite"></p><a class="result-link" id="back-to-bid" href="auction.html">Back to bidding</a></section>
-<section class="result-card"><h2>Your private bids</h2><p>Only this browser and connected wallet can unlock your bid values and salts.</p><div id="my-bids" class="result-bids">Connect a wallet to view your private bids.</div></section></main>
-<script type="module" src="main.js"></script><script type="module" src="auction.js"></script>
-</body></html>
+  <div class="page" style="padding-bottom: 0;">
+    <header class="site-header">
+      <a href="index.html" class="logo-btn" aria-label="ProofXShield home">
+        <img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" />
+      </a>
+      <nav class="nav-pill" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="create-auction.html" class="nav-link">Auctions</a>
+        <a href="auction.html" class="nav-link">Place bid</a>
+        <a href="auction-results.html" class="nav-link active" aria-current="page">Declare winner</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <a href="auth.html" class="nav-link account-link">Sign in</a>
+      </nav>
+      <button class="sign-in-btn wallet-nav-button btn solid" type="button" data-wallet-connect>Connect wallet</button>
+      <span class="wallet-nav-status" data-wallet-status aria-live="polite"></span>
+      <button class="mobile-burger" aria-label="Toggle Menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </header>
+
+    <div class="mobile-overlay"></div>
+    <nav class="mobile-sheet" aria-label="Mobile Navigation">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="create-auction.html" class="mobile-nav-link">Auctions</a>
+      <a href="auction.html" class="mobile-nav-link">Place bid</a>
+      <a href="auction-results.html" class="mobile-nav-link active" aria-current="page">Declare winner</a>
+      <a href="profile.html" class="mobile-nav-link">Profile</a>
+      <button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button>
+      <a href="auth.html" class="mobile-sign-in">Sign in</a>
+    </nav>
+
+    <main class="results-wrap">
+      <span class="orbit-chip">Midnight · Preprod Testnet</span>
+      <h1 id="auction-title">Reveal &amp; results</h1>
+      <p>Reveal your saved bids after the creator closes bidding. The creator can then publish the final result to the Midnight contract.</p>
+      
+      <div class="result-address">
+        Shared contract <code id="auction-contract-address">Loading…</code><br />
+        Auction ID <code id="auction-id-value">Loading…</code>
+      </div>
+
+      <section class="result-metrics">
+        <span>Phase<strong id="phase-value">Loading…</strong></span>
+        <span>Reserve<strong id="reserve-value">—</strong></span>
+        <span>Sealed bids<strong id="commitment-count">—</strong></span>
+        <span>Revealed bids<strong id="revealed-count">—</strong></span>
+        <span>Leading revealed bid<strong id="leading-bid">—</strong></span>
+      </section>
+
+      <section class="result-card">
+        <h2>Conclude auction</h2>
+        <p id="auction-chain-status">Reading live chain state…</p>
+        <p id="wallet-address">Not connected</p>
+        
+        <div id="owner-actions" data-view="results" hidden>
+          <p>You created this auction. Closing bidding permanently ends new commitments.</p>
+          <button id="close-bidding" class="btn solid" type="button" disabled>Close bidding</button>
+        </div>
+        
+        <div id="reveal-panel" data-view="results" hidden>
+          <p>Revealing publishes each saved bid amount to the chain for a verifiable result.</p>
+          <button id="reveal-bids" class="btn solid" type="button" disabled>Reveal my bids</button>
+          
+          <div id="owner-finalize" hidden style="margin-top: 14px;">
+            <p>Only the creator can publish the final result.</p>
+            <button id="declare-winner" class="btn solid" type="button" disabled>Declare winner</button>
+          </div>
+        </div>
+
+        <div id="finished-panel" data-view="results" hidden>
+          <p>This auction is finalized. The result below is read from Preprod.</p>
+          <strong id="final-result">—</strong>
+        </div>
+
+        <p id="auction-message" class="result-status" role="status" aria-live="polite"></p>
+        <a class="result-link btn ghost" id="back-to-bid" href="auction.html" style="margin-top: 14px;">Back to bidding</a>
+      </section>
+
+      <section class="result-card">
+        <h2>Your private bids</h2>
+        <p>Only this browser and connected wallet can unlock your bid values and salts.</p>
+        <div id="my-bids" class="result-bids">Connect a wallet to view your private bids.</div>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/proofxshield-mark.svg" alt="ProofXShield" width="36" height="36" />
+            <span>ProofXShield</span>
+          </a>
+          <p class="footer-tagline">Shielded sealed-bid auctions powered by zero-knowledge proofs on the Midnight blockchain.</p>
+          <div class="network-badge">
+            <span class="chain-dot"></span>
+            <span>Midnight Preprod Testnet</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="create-auction.html">Auctions</a>
+          <a href="auction.html">Place Bid</a>
+          <a href="auction-results.html">Declare Winner</a>
+          <a href="profile.html">Your Profile</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Protocol</h4>
+          <a href="index.html#architecture">Architecture</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#faq">FAQ</a>
+          <a href="auth.html">Authentication</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Contract</h4>
+          <p class="footer-contract-label">Shared Contract ID:</p>
+          <code class="footer-contract-id">5945455af1774...e67e287</code>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 ProofXShield. All rights reserved. Built on Midnight Blockchain.</p>
+        <div class="footer-legal">
+          <span>Zero-Knowledge Confidentiality</span>
+          <span>•</span>
+          <span>Midnight Preprod</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="main.js"></script>
+  <script type="module" src="auction.js"></script>
+</body>
+</html>

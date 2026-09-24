@@ -2,7 +2,7 @@ import { Buffer } from 'buffer/';
 
 globalThis.Buffer ??= Buffer;
 
-document.addEventListener('DOMContentLoaded', () => {
+function initWalletNavbar() {
   const buttons = [...document.querySelectorAll('[data-wallet-connect]')];
   const liveRegion = document.querySelector('[data-wallet-status]');
   if (!buttons.length) return;
@@ -197,4 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
   restoreWallet().catch((error) => {
     console.warn('[ProofXShield] Could not restore the wallet connection:', error);
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initWalletNavbar);
+} else {
+  initWalletNavbar();
+}

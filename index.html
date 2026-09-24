@@ -26,20 +26,20 @@
 </head>
 
 <body>
-  <!-- Full-bleed background video -->
+  <!-- Full-bleed Orbit video background -->
   <div class="bg">
-    <video class="bg-video" autoplay muted loop playsinline>
-      <source
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
-        type="video/mp4" />
+    <video class="bg-video" autoplay muted loop playsinline preload="auto"
+      poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/0bf7409c-9fa2-4bef-a49d-34903dcc91ad.png">
+      <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4b73c700-3112-4c07-bd48-0af2893dff7c.mp4" type="video/mp4" />
     </video>
+    <div class="veil"></div>
   </div>
 
   <!-- Page content: 3 vertical regions -->
   <div class="page">
     <!-- 1) Header -->
     <header class="site-header">
-      <!-- Circular Logo -->
+      <!-- Logo Button -->
       <a href="index.html" class="logo-btn" aria-label="Home">
         <img src="assets/proofxshield-mark.svg" alt="" width="52" height="52" />
       </a>
@@ -50,10 +50,11 @@
         <a href="create-auction.html" class="nav-link">Auctions</a>
         <a href="auction.html" class="nav-link">Place bid</a>
         <a href="auction-results.html" class="nav-link">Declare winner</a>
+        <a href="profile.html" class="nav-link">Profile</a>
         <a href="auth.html" class="nav-link account-link">Sign in</a>
       </nav>
 
-      <button class="sign-in-btn wallet-nav-button" type="button" data-wallet-connect>Connect wallet</button>
+      <button class="sign-in-btn wallet-nav-button btn solid" type="button" data-wallet-connect>Connect wallet</button>
       <span class="wallet-nav-status" data-wallet-status aria-live="polite"></span>
 
       <!-- Mobile Hamburger Button -->
@@ -71,26 +72,211 @@
       <a href="create-auction.html" class="mobile-nav-link">Auctions</a>
       <a href="auction.html" class="mobile-nav-link">Place bid</a>
       <a href="auction-results.html" class="mobile-nav-link">Declare winner</a>
+      <a href="profile.html" class="mobile-nav-link">Profile</a>
       <button class="mobile-wallet-connect" type="button" data-wallet-connect>Connect wallet</button>
       <a href="auth.html" class="mobile-sign-in">Sign in</a>
     </nav>
 
     <!-- 2) Hero Section -->
     <main class="hero">
+      <!-- Orbit Eyebrow Pill -->
+      <a href="create-auction.html" class="orbit-pill anim">
+        <span class="orbit-chip">New</span>
+        <span class="orbit-pill-label">Sealed-Bid Auctions on Midnight</span>
+        <svg class="orbit-arrow" viewBox="0 0 9.5 8" width="9.5" height="8">
+          <path d="M0.7 4H8.8M5.6 0.75 8.85 4 5.6 7.25" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+        </svg>
+      </a>
+
       <h1 class="headline anim">
-        <span class="headline-line">Prove what matters.</span>
-        <span class="headline-line">Keep the details private.</span>
+        <span class="headline-line">Zero-Knowledge Sealed Bidding.</span>
+        <span class="headline-line">Absolute Privacy on Midnight.</span>
       </h1>
 
       <p class="subhead anim" style="--d: 0.28s;">
-        ProofXShield is a sealed-bid auction on Midnight. Bidders publish commitments to private bids, then reveal after bidding closes. The chain verifies each opening and records the leading eligible bid.
+        ProofXShield brings confidential sealed-bid auctions to the Midnight blockchain. Submit cryptographically shielded bid commitments, maintain total privacy during live rounds, and verify winning outcomes with zero-knowledge proofs.
       </p>
 
-      <a href="profile.html" class="cta-btn anim" style="--d: 0.4s;">
-        Open your dashboard
-      </a>
+      <div class="cta-row anim" style="--d: 0.4s;">
+        <a href="create-auction.html" class="btn solid">Explore Auctions</a>
+        <a href="auction.html" class="btn ghost">Place a Bid</a>
+      </div>
+
       <img class="hero-art" src="assets/proofxshield-hero.svg" alt="ProofXShield shield mark for a private sealed bid" width="900" height="760" />
     </main>
+
+    <!-- 3) Architecture Section -->
+    <section class="section architecture-section" id="architecture">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="orbit-chip">Architecture</span>
+          <h2 class="section-title">Zero-Knowledge Sealed-Bid Protocol</h2>
+          <p class="section-desc">
+            Engineered specifically for Midnight — combining WASM client-side proving, shielded bid state commitments, and tamper-proof smart contract verification.
+          </p>
+        </div>
+
+        <div class="architecture-grid">
+          <!-- Step 1 -->
+          <div class="arch-card">
+            <div class="arch-step">01</div>
+            <div class="arch-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <h3>Local WASM Proving</h3>
+            <p>Your bid amount and private nonce never leave your browser. Zero-knowledge proof generation happens client-side using Midnight Compact WASM proving keys.</p>
+            <div class="arch-tag">Client-Side ZK</div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="arch-card">
+            <div class="arch-step">02</div>
+            <div class="arch-icon"><i class="fa-solid fa-lock"></i></div>
+            <h3>On-Chain Commitment</h3>
+            <p>Only the cryptographic commitment hash is broadcast to the Midnight Preprod testnet ledger. No competitor, indexer, or node operator can observe your bid.</p>
+            <div class="arch-tag">Shielded Ledger</div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="arch-card">
+            <div class="arch-step">03</div>
+            <div class="arch-icon"><i class="fa-solid fa-award"></i></div>
+            <h3>Verifiable Winner Proof</h3>
+            <p>When the round ends, zk-verification proves the highest valid bid in zero-knowledge. The winning commitment is verified without exposing losing bids.</p>
+            <div class="arch-tag">Cryptographic Truth</div>
+          </div>
+        </div>
+
+        <!-- Quick Action Bar -->
+        <div class="arch-cta-bar">
+          <div class="arch-cta-text">
+            <h4>Ready to experience private sealed-bid auctions?</h4>
+            <p>Connect your Midnight Lace or 1AM wallet and launch or participate in a live round instantly.</p>
+          </div>
+          <div class="arch-cta-actions">
+            <a href="create-auction.html" class="btn solid">Create an Auction</a>
+            <a href="auction.html" class="btn ghost">Place a Sealed Bid</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) Feature Highlights Section -->
+    <section class="section features-section" id="features">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="orbit-chip">Key Features</span>
+          <h2 class="section-title">Built for Absolute Privacy</h2>
+          <p class="section-desc">Traditional public blockchains leak bidding strategies. ProofXShield eliminates front-running and collusion completely.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-eye-slash"></i></div>
+            <h3>Front-Running Protection</h3>
+            <p>Bids are sealed until the reveal phase. No MEV bots, miners, or sniper algorithms can front-run your bid value.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-file-contract"></i></div>
+            <h3>Shared Contract Architecture</h3>
+            <p>Operates on a pre-deployed Midnight smart contract instance. Single-click deployment and instant listing in the global catalogue.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
+            <h3>Seamless Wallet Support</h3>
+            <p>Native integration with Lace and 1AM Midnight browser extensions. Securely sign transaction commitments with one click.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Compact Language & WASM</h3>
+            <p>Built using Midnight's Compact smart contract domain-specific language with high-performance WebAssembly zero-knowledge verifiers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) FAQ Section -->
+    <section class="section faq-section" id="faq">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="orbit-chip">FAQ</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Everything you need to know about ProofXShield and Midnight zero-knowledge sealed-bid auctions.</p>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>How are my bids kept confidential?</h3>
+            <p>Your bid amount and secret salt are processed locally inside your browser using WebAssembly proving keys. Only a cryptographic commitment hash is submitted to Midnight's private ledger.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>What wallet do I need to use ProofXShield?</h3>
+            <p>You need a Midnight-compatible browser extension wallet such as Lace (Midnight edition) or 1AM Wallet connected to the Midnight Preprod testnet.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>Can an auction creator or miner tamper with results?</h3>
+            <p>No. Zero-knowledge proofs mathematically enforce the auction rules on-chain. Winning outcomes are verified against submitted commitments without exposing unrevealed data.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3>How do I create or join an auction?</h3>
+            <p>You can create a new auction round via the <a href="create-auction.html">Create Auction</a> page, or place sealed bids on existing rounds via the <a href="auction.html">Place Bid</a> page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) Site Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/proofxshield-mark.svg" alt="ProofXShield" width="36" height="36" />
+            <span>ProofXShield</span>
+          </a>
+          <p class="footer-tagline">Shielded sealed-bid auctions powered by zero-knowledge proofs on the Midnight blockchain.</p>
+          <div class="network-badge">
+            <span class="chain-dot"></span>
+            <span>Midnight Preprod Testnet</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <a href="index.html">Home</a>
+          <a href="create-auction.html">Auctions</a>
+          <a href="auction.html">Place Bid</a>
+          <a href="auction-results.html">Declare Winner</a>
+          <a href="profile.html">Your Profile</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Protocol</h4>
+          <a href="#architecture">Architecture</a>
+          <a href="#features">Features</a>
+          <a href="#faq">FAQ</a>
+          <a href="auth.html">Authentication</a>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Contract</h4>
+          <p class="footer-contract-label">Shared Contract ID:</p>
+          <code class="footer-contract-id">5945455af1774...e67e287</code>
+          <div class="footer-actions">
+            <a href="create-auction.html" class="btn solid">Launch Round</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 ProofXShield. All rights reserved. Built on Midnight Blockchain.</p>
+        <div class="footer-legal">
+          <span>Zero-Knowledge Confidentiality</span>
+          <span>•</span>
+          <span>Midnight Preprod</span>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- Scripts -->

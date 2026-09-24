@@ -1,6 +1,12 @@
 import './wallet-navbar.js';
+import { proofshieldDeployAuction } from './proof-client.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+if (typeof window !== 'undefined') {
+  window.proofshieldDeployAuction = proofshieldDeployAuction;
+  window.deployProofXShieldAuction = proofshieldDeployAuction;
+}
+
+function initMain() {
   const burger = document.querySelector('.mobile-burger');
   const overlay = document.querySelector('.mobile-overlay');
   const sheet = document.querySelector('.mobile-sheet');
@@ -53,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       document.querySelectorAll('.auction-nav-link').forEach((link) => link.classList.toggle('active', auctionPage));
       document.querySelectorAll('a.nav-link[href="profile.html"], a.mobile-nav-link[href="profile.html"]').forEach((link) => {
-        link.hidden = signedIn;
+        link.hidden = false;
       });
     })
     .catch(() => {
@@ -62,4 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         link.textContent = 'Sign in';
       });
     });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMain);
+} else {
+  initMain();
+}
